@@ -1,0 +1,14 @@
+ion-card-content {
+    p {
+        cursor: pointer;
+        margin-top: 10px
+    }
+
+    p:hover {
+        text-decoration: underline;
+    }
+
+    ion-card-subtitle {
+        cursor: pointer;
+    }
+}

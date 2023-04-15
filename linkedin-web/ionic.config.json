@@ -1,0 +1,7 @@
+{
+  "name": "linkedin-web",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

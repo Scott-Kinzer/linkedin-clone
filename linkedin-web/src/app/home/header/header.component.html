@@ -1,0 +1,67 @@
+<ion-header class="ion-container ion-no-border">
+  <ion-toolbar>
+    <div class="toolbar-wrapper">
+      <ion-buttons slot="start" class="ion-no-padding">
+        <ion-button>
+          <ion-icon
+            size="large"
+            color="primary"
+            name="logo-linkedin"
+          ></ion-icon>
+          <ion-searchbar
+            color="primary"
+            class="ion-hide-lg-down"
+            aria-placeholder="Search"
+          ></ion-searchbar>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-end">
+          <ion-col class="nav-icon-wrapper" size="auto">
+            <ion-icon name="home"></ion-icon>
+            <p>Home</p>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="people"></ion-icon>
+            <p>People</p>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="briefcase"></ion-icon>
+            <p>Jobs</p>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="chatbox-ellipses"></ion-icon>
+            <p>Messaging</p>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="notifications"></ion-icon>
+            <p>Notifications</p>
+            <ion-badge
+              style="
+                position: absolute;
+                top: 2px;
+                height: 10px;
+                width: 10px;
+                border-radius: 9999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                right: 26px;
+              "
+              color="danger"
+              >2</ion-badge
+            >
+          </ion-col>
+          <ion-col size="auto">
+            <ion-avatar (click)="presentPopover($event)">
+              <ion-img
+                src="https://img.freepik.com/photos-gratuite/gros-plan-pamplemousse-tranches_23-2148804855.jpg"
+              ></ion-img>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-toolbar>
+</ion-header>
