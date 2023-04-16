@@ -1,0 +1,39 @@
+ion-card {
+    width: 315px;
+    box-shadow: none;
+    border: 1px solid gray; 
+}
+
+ion-card-header {
+    padding: 8px;
+
+    ion-icon {
+        font-size: 30px;
+    }
+
+    ion-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h5 {
+            font-size: 16px;
+        }
+    }
+}
+
+.list-of-events {
+    padding-top: 0;
+
+    h5 {
+        cursor: pointer;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
+
+ion-button {
+    display: flex;
+    margin: 0;
+    height: 40px;
+    border-radius: 0;
+}

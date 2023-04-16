@@ -27,4 +27,21 @@
 
 .profile-modal {
     --offset-y: 20px;
+
+    ion-card {
+     margin-inline: 0; 
+     margin-top: 0; 
+     margin-bottom: 0;
+    }
+}
+
+.start-post-modal {
+    --width: 552px;
+    --height: 400px;
+
+    app-modal {
+        width: 552px;
+        height: 400px;
+        background: white;
+    }
 }
