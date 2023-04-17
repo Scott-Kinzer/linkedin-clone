@@ -1,0 +1,52 @@
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let item of allPosts; let index">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-padding" size="auto">
+            <ion-avatar>
+              <ion-img
+                src="https://img.freepik.com/photos-gratuite/gros-plan-pamplemousse-tranches_23-2148804855.jpg"
+              ></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col class="ion-padding" size="auto">
+            <div class="full-name">Addy Merphy</div>
+            <div class="role">Web developer</div>
+            <div class="meta-data">
+              1d <ion-icon name="ellipse"></ion-icon> Edited<ion-icon
+                name="ellipse"
+              ></ion-icon>
+              <ion-icon name="globe-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+        <p class="post-body">{{ item.body }}</p>
+        <ion-row>
+          <ion-button color="medium" fill="clear">
+            <ion-icon name="thumbs-up-outline"> </ion-icon>
+            <ion-text>Like</ion-text>
+          </ion-button>
+          <ion-button color="medium" fill="clear">
+            <ion-icon name="chatbox-ellipses-outline"> </ion-icon>
+            <ion-text>Comment</ion-text>
+          </ion-button>
+          <ion-button color="medium" fill="clear">
+            <ion-icon name="arrow-redo-outline"> </ion-icon>
+            <ion-text>Share</ion-text>
+          </ion-button>
+          <ion-button color="medium" fill="clear">
+            <ion-icon name="paper-plane-outline"> </ion-icon>
+            <ion-text>Send</ion-text>
+          </ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingText="Please wait..."
+      loadingSpinner="bubbles"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
