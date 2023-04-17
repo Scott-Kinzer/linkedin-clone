@@ -9,6 +9,7 @@ import { StartPostModule } from './start-post/start-post.module';
 import { ModalModule } from './start-post/modal/modal.module';
 import { AllPostsModule } from './all-posts/all-posts.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TabsModule } from './tabs/tabs.module';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalModule,
     AllPostsModule,
     HttpClientModule,
+    TabsModule,
   ],
 })
 export class HomePage {

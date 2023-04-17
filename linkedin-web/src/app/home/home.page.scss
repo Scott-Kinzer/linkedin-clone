@@ -1,5 +1,6 @@
 :host {
     justify-content: start;
+    background: white;
 }
 
 .content-container {
@@ -15,4 +16,10 @@ app-all-posts, .posts-divider {
 .post-divider {
     padding-top: 8px;
     margin: 0 12px;
+}
+
+app-tabs {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

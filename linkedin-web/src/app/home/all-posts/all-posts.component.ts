@@ -20,11 +20,12 @@ export class AllPostsComponent implements OnInit {
     this.getPosts();
   }
 
-  async getPosts() {
+  async getPosts(ev?: Event) {
     const data = this.postService.getSelectedPosts(this.take, this.skip);
     data.subscribe((data) => {
       if (data.length < 5) {
         this.isStopLoading = true;
+        (ev as InfiniteScrollCustomEvent).target.style.display = 'none';
       }
       this.allPosts.push(...data);
     });
@@ -33,11 +34,12 @@ export class AllPostsComponent implements OnInit {
   async onIonInfinite(ev: Event) {
     if (this.isStopLoading) {
       (ev as InfiniteScrollCustomEvent).target.complete();
+
       return;
     }
     this.skip += 5;
 
-    await this.getPosts();
+    await this.getPosts(ev);
     (ev as InfiniteScrollCustomEvent).target.complete();
   }
 }

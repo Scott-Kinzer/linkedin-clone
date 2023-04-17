@@ -5,14 +5,27 @@ ion-col {
 ion-content {
     height: calc(100vh - 320px);
 
+    @media (max-width: 768px) {
+        height: calc(100vh - 384px);
+    }
+
     ion-list {
-        background-color: #f3f2ef;
+        background-color: white;
         padding-top: 0;
     }
 
     ion-card {
         box-shadow: none;
         width: 523px;
+        box-shadow: 0px 1px 10px 0px gray;
+        border-radius: 10px;
+
+        @media (max-width: 600px) {
+            max-width: 400px;
+            width: auto;
+            box-shadow: 0px 1px 10px 0px gray;
+            border-radius: 10px;
+        }
 
         .meta-data {
             display: flex;

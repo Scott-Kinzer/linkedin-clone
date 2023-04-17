@@ -1,0 +1,37 @@
+<ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar>
+      <ion-tab-button>
+        <ion-icon name="home"></ion-icon>
+        <div>Home</div>
+      </ion-tab-button>
+      <ion-tab-button>
+        <ion-icon name="People"></ion-icon>
+        <div>My network</div>
+      </ion-tab-button>
+      <ion-tab-button (click)="openModal()">
+        <ion-icon name="add-circle"></ion-icon>
+        <div>Post</div>
+      </ion-tab-button>
+      <ion-tab-button>
+        <ion-icon name="notifications"></ion-icon>
+        <div>Notifications</div>
+        <ion-badge
+          style="
+            position: absolute;
+            top: 2px;
+            height: 10px;
+            width: 10px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 26px;
+          "
+          color="danger"
+          >2</ion-badge
+        >
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
