@@ -22,6 +22,12 @@ ion-card-header {
     }
 }
 
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+}
+
 .list-of-events {
     padding-top: 0;
 

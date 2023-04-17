@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { PostService } from '../service/post.service';
 import { Post } from '../models/Post';
-
+import { mergeMap, delay, takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-all-posts',
   templateUrl: './all-posts.component.html',
@@ -13,33 +13,38 @@ export class AllPostsComponent implements OnInit {
 
   allPosts = <Post[]>[];
   isStopLoading = false;
+  isShowLoader = true;
   take = 5;
   skip = 0;
+
+  @HostListener('document:scroll', ['$event'])
+  public onViewportScroll() {
+    if (window.innerHeight + window.scrollY + 1 >= document.body.scrollHeight) {
+      if (this.isStopLoading) return;
+      this.isStopLoading = true;
+      this.isShowLoader = true;
+
+      this.skip += 5;
+      this.getPosts();
+    }
+  }
 
   ngOnInit() {
     this.getPosts();
   }
 
-  async getPosts(ev?: Event) {
-    const data = this.postService.getSelectedPosts(this.take, this.skip);
+  async getPosts() {
+    const data = this.postService
+      .getSelectedPosts(this.take, this.skip)
+      .pipe(delay(1000));
     data.subscribe((data) => {
+      this.isStopLoading = false;
+      this.isShowLoader = false;
+
       if (data.length < 5) {
         this.isStopLoading = true;
-        (ev as InfiniteScrollCustomEvent).target.style.display = 'none';
       }
       this.allPosts.push(...data);
     });
-  }
-
-  async onIonInfinite(ev: Event) {
-    if (this.isStopLoading) {
-      (ev as InfiniteScrollCustomEvent).target.complete();
-
-      return;
-    }
-    this.skip += 5;
-
-    await this.getPosts(ev);
-    (ev as InfiniteScrollCustomEvent).target.complete();
   }
 }

@@ -1,12 +1,14 @@
 :host {
     justify-content: start;
-    background: white;
+    position: unset;
+    overflow: unset;
 }
 
 .content-container {
     display: flex;
     max-width: 1128px;
     margin: 40px auto 0;
+    height: 100%;
 }
 
 app-all-posts, .posts-divider {

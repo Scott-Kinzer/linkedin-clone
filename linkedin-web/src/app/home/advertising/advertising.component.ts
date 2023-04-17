@@ -5,10 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './advertising.component.html',
   styleUrls: ['./advertising.component.scss'],
 })
-export class AdvertisingComponent  implements OnInit {
-
-  constructor() { }
+export class AdvertisingComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
-
 }
