@@ -1,18 +1,23 @@
+import { UserEntity } from 'src/auth/models/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('feed_post')
 export class FeedPostEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ default: '' })
   body: string;
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToMany(() => UserEntity, (userEntity) => userEntity.feedPosts)
+  author: UserEntity;
 }
