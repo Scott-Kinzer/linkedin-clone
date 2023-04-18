@@ -1,0 +1,111 @@
+<form [formGroup]="signUpForm">
+  <ion-card>
+    <ion-item>
+      <ion-input
+        formControlName="firstName"
+        type="text"
+        name="firstName"
+        label="Enter first name"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(firstName?.invalid && firstName?.touched) || firstName?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="firstName?.errors?.required"
+          >Please enter your name</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="firstName?.errors?.pattern"
+          >Please enter valid name</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="lastName"
+        type="text"
+        name="lastName"
+        label="Enter last name"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(lastName?.invalid && lastName?.touched) || lastName?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="lastName?.errors?.required"
+          >Please enter your last name</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="lastName?.errors?.pattern"
+          >Please enter valid last name</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="email"
+        type="email"
+        name="email"
+        label="Enter email"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(email?.invalid && email?.touched) || email?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="email?.errors?.required"
+          >Please enter your email</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="email?.errors && email?.errors?.pattern"
+          >Please provide a valid email addres</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="password"
+        type="password"
+        name="password"
+        label="Enter password"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(password?.invalid && password?.touched) || password?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="password?.errors?.required"
+          >Please enter your password</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="password?.errors && password?.errors?.minlength"
+          >Min length of the password is 5</ion-text
+        >
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-button [disabled]="!!signUpForm.invalid" type="submit" shape="round"
+    >Sign up</ion-button
+  >
+</form>

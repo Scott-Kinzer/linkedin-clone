@@ -96,6 +96,7 @@ ion-app {
     contain: unset;
     overflow: unset;
     z-index: 0;
+    height: 100%;
 }
 
 .ion-page {
@@ -118,4 +119,21 @@ ion-router-outlet {
     contain: unset;
     overflow: unset;
     z-index: 0;
+}
+
+app-root {
+    display: block;
+    height: 100%;
+}
+
+app-auth {
+    height: 100%;
+}
+
+ion-router-outlet {
+    height: 100%;
+}
+
+.ion-color.sc-ion-label-md-h {
+    color: grey;
 }

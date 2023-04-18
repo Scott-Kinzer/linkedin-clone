@@ -1,0 +1,59 @@
+<form [formGroup]="loginForm">
+  <ion-card>
+    <ion-item>
+      <ion-input
+        formControlName="email"
+        type="email"
+        name="email"
+        label="Enter email"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(email?.invalid && email?.touched) || email?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="email?.errors?.required"
+          >Please enter your email</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="email?.errors && email?.errors?.pattern"
+          >Please provide a valid email addres</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="password"
+        type="password"
+        name="password"
+        label="Enter password"
+        labelPlacement="floating"
+      ></ion-input>
+      <div
+        class="error-wrapper"
+        *ngIf="(password?.invalid && password?.touched) || password?.dirty"
+      >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="password?.errors?.required"
+          >Please enter your password</ion-text
+        >
+        <ion-text
+          style="font-size: 12px"
+          color="danger"
+          *ngIf="password?.errors && password?.errors?.minlength"
+          >Min length of the password is 5</ion-text
+        >
+      </div>
+    </ion-item>
+  </ion-card>
+  <ion-button [disabled]="!!loginForm.invalid" type="submit" shape="round"
+    >Login</ion-button
+  >
+</form>

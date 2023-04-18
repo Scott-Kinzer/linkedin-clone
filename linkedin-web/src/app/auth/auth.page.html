@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="title-container">
+    <ion-text class="linkedin-text">Linked</ion-text>
+    <ion-icon
+      class="linkedin-icon"
+      name="logo-linkedin"
+      color="primary"
+    ></ion-icon>
+  </div>
+  <div class="subtitle-container">Make the most of your professional life</div>
+  <div class="auth-container">
+    <div class="buttons-wrapper">
+      <ion-button
+        [color]="authStage === 'login' ? 'secondary' : 'light'"
+        (click)="showLogin()"
+        >Login</ion-button
+      >
+      <ion-button
+        [color]="authStage === 'signUp' ? 'secondary' : 'light'"
+        (click)="showSignUp()"
+        >Sign-up</ion-button
+      >
+    </div>
+    <div
+      class="sub-wrapper authStage"
+      [ngClass]="{ swipe: authStage === 'signUp' }"
+    >
+      <app-login></app-login>
+      <app-sign-up></app-sign-up>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { PostService } from '../service/post.service';
 import { Post } from '../models/Post';
-import { mergeMap, delay, takeUntil } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
+
 @Component({
   selector: 'app-all-posts',
   templateUrl: './all-posts.component.html',
