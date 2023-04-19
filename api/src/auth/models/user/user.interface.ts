@@ -1,5 +1,5 @@
 import { FeedPost } from 'src/feed/models/post.interface';
-import { Role } from './role';
+import { Role } from '../role';
 
 export interface User {
   id?: string;
@@ -9,4 +9,9 @@ export interface User {
   password: string;
   role?: Role;
   posts?: FeedPost[];
+}
+
+export interface UserLoginPayload {
+  email: string;
+  password: string;
 }

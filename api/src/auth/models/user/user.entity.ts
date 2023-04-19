@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from './role';
+import { Role } from '../role';
 import { FeedPostEntity } from 'src/feed/models/post.entity';
-import { TokenEntity } from './token.entity';
+import { TokenEntity } from '../tokens/token.entity';
 
 @Entity('user')
 export class UserEntity {
