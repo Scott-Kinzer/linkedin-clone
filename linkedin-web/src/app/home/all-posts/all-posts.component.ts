@@ -1,15 +1,26 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../service/post.service';
 import { Post } from '../models/Post';
 import { delay } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-posts',
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.scss'],
 })
-export class AllPostsComponent implements OnInit {
-  constructor(private postService: PostService) {}
+export class AllPostsComponent implements OnInit, OnDestroy {
+  constructor(private postService: PostService, private router: Router) {
+    router.events.subscribe((event) => {
+      this.allPosts = [];
+      this.take = 5;
+      this.skip = 0;
+
+      if (event instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   allPosts = <Post[]>[];
   isStopLoading = false;
@@ -31,6 +42,13 @@ export class AllPostsComponent implements OnInit {
 
   ngOnInit() {
     this.getPosts();
+  }
+
+  ngOnDestroy(): void {
+    this.allPosts = [];
+
+    this.take = 5;
+    this.skip = 0;
   }
 
   async getPosts() {
