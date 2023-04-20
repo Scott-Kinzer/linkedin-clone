@@ -5,6 +5,7 @@ import { FeedPostEntity } from '../models/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FeedPost } from '../models/post.interface';
 import { Observable, from } from 'rxjs';
+import { User } from 'src/auth/models/user/user.interface';
 
 @Injectable()
 export class FeedService {
@@ -13,8 +14,15 @@ export class FeedService {
     private readonly feedPostRepository: Repository<FeedPostEntity>,
   ) {}
 
-  createPost(feedPost: FeedPost): Observable<FeedPost> {
-    return from(this.feedPostRepository.save(feedPost));
+  async createPost(user: User, feedPost: FeedPost): Promise<FeedPost> {
+    feedPost.author = user;
+
+    const createdPost = await this.feedPostRepository.save(feedPost);
+
+    delete createdPost.author.password;
+    delete createdPost.author.role;
+
+    return createdPost;
   }
 
   findAllPosts(): Observable<FeedPost[]> {
@@ -29,11 +37,27 @@ export class FeedService {
     );
   }
 
-  updatePost(id: number, feedPost: FeedPost): Observable<UpdateResult> {
-    return from(this.feedPostRepository.update(id, feedPost));
+  async updatePost(
+    id: string,
+    feedPost: FeedPost,
+    user: User,
+  ): Promise<UpdateResult> {
+    const findPost = await this.feedPostRepository.findOneBy({ id });
+
+    if (findPost.author.id !== user.id) {
+      return null;
+    }
+
+    return this.feedPostRepository.update(id, feedPost);
   }
 
-  deletePost(id: number): Observable<DeleteResult> {
-    return from(this.feedPostRepository.delete(id));
+  async deletePost(id: string, user: User): Promise<DeleteResult> {
+    const findPost = await this.feedPostRepository.findOneBy({ id });
+
+    if (findPost.author.id !== user.id) {
+      return null;
+    }
+
+    return this.feedPostRepository.delete(id);
   }
 }

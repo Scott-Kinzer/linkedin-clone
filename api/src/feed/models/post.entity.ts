@@ -3,7 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -18,6 +18,6 @@ export class FeedPostEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToMany(() => UserEntity, (userEntity) => userEntity.feedPosts)
+  @ManyToOne(() => UserEntity, (userEntity) => userEntity.feedPosts)
   author: UserEntity;
 }
