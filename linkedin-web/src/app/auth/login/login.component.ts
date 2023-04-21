@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { InputTypes } from '../models/inputTypes';
+import { InputTypes, LoginPayload } from '../models/inputTypes';
 import { patterns } from 'src/app/models/patterns';
+import { AuthService } from '../services/auth.service';
+import { Token } from 'src/app/models/token.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,7 @@ import { patterns } from 'src/app/models/patterns';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {}
 
   loginForm = new FormGroup({
@@ -32,5 +35,14 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get([InputTypes.Password]);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.authService
+      .login(this.loginForm.value as LoginPayload)
+      .subscribe((data) => {
+        localStorage.setItem(Token.ACCESS_TOKEN, data.accessToken);
+        localStorage.setItem(Token.REFRESH_TOKEN, data.refreshToken);
+
+        this.router.navigate(['/home']);
+      });
+  }
 }

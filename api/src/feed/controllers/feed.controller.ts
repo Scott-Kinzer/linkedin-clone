@@ -12,7 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { FeedService } from '../services/feed.service';
-import { FeedPost } from '../models/post.interface';
+import { FeedPost, FeedPostPayload } from '../models/post.interface';
 import { Observable, from } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
@@ -25,7 +25,7 @@ export class FeedController {
   @UseGuards(JwtGuard)
   @Post()
   create(
-    @Body() post: FeedPost,
+    @Body() post: FeedPostPayload,
     @Request() req: { user: User },
   ): Promise<FeedPost> {
     return this.feedService.createPost(req.user, post);

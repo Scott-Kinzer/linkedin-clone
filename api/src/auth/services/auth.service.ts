@@ -47,6 +47,7 @@ export class AuthService {
   generateTokens(user: User): { accessToken: string; refreshToken: string } {
     const accessToken = this.jwtService.sign(user, {
       secret: process.env.JWT_SECRET,
+      expiresIn: '15m',
     });
 
     const refreshToken = this.jwtService.sign(user, {

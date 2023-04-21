@@ -6,3 +6,7 @@ export interface FeedPost {
   createdAt?: Date;
   author: User;
 }
+
+export interface FeedPostPayload {
+  body: string;
+}

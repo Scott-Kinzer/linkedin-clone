@@ -10,6 +10,8 @@ import { TabsModule } from './tabs/tabs.module';
 import { UserService } from './service/user.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { User } from './models/User';
+import { Post } from './models/Post';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +31,8 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class HomePage {
-  userData = null;
+  userData?: User;
+  post?: Post;
 
   constructor(private userService: UserService, private router: Router) {
     router.events.subscribe((event) => {
@@ -43,5 +46,10 @@ export class HomePage {
     this.userService.getUserInfo().subscribe((data) => {
       this.userData = data;
     });
+  }
+
+  onCreatePost(body: Post) {
+    console.log(body);
+    this.post = body;
   }
 }

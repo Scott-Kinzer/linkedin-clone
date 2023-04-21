@@ -1,4 +1,12 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { PostService } from '../service/post.service';
 import { Post } from '../models/Post';
 import { delay } from 'rxjs/operators';
@@ -9,7 +17,9 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.scss'],
 })
-export class AllPostsComponent implements OnInit, OnDestroy {
+export class AllPostsComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() postBody?: Post;
+
   constructor(private postService: PostService, private router: Router) {
     router.events.subscribe((event) => {
       this.allPosts = [];
@@ -20,6 +30,14 @@ export class AllPostsComponent implements OnInit, OnDestroy {
         this.ngOnInit();
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const postBody = changes.postBody.currentValue;
+
+    if (!postBody) return;
+
+    this.allPosts = [postBody, ...this.allPosts];
   }
 
   allPosts = <Post[]>[];

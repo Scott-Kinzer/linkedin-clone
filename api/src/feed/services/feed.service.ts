@@ -3,7 +3,7 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
 import { FeedPostEntity } from '../models/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FeedPost } from '../models/post.interface';
+import { FeedPost, FeedPostPayload } from '../models/post.interface';
 import { Observable, from } from 'rxjs';
 import { User } from 'src/auth/models/user/user.interface';
 
@@ -14,10 +14,11 @@ export class FeedService {
     private readonly feedPostRepository: Repository<FeedPostEntity>,
   ) {}
 
-  async createPost(user: User, feedPost: FeedPost): Promise<FeedPost> {
-    feedPost.author = user;
-
-    const createdPost = await this.feedPostRepository.save(feedPost);
+  async createPost(user: User, feedPost: FeedPostPayload): Promise<FeedPost> {
+    const createdPost = await this.feedPostRepository.save({
+      ...feedPost,
+      author: user,
+    });
 
     delete createdPost.author.password;
     delete createdPost.author.role;
@@ -31,9 +32,14 @@ export class FeedService {
 
   findPosts(take: number, skip: number): Observable<FeedPost[]> {
     return from(
-      this.feedPostRepository.findAndCount({ take, skip }).then(([posts]) => {
-        return posts;
-      }),
+      this.feedPostRepository
+        .createQueryBuilder('post')
+        .leftJoinAndSelect('post.author', 'author')
+        .select(['post', 'author.firstName', 'author.lastName'])
+        .orderBy('post.createdAt', 'DESC')
+        .take(take)
+        .skip(skip)
+        .getMany(),
     );
   }
 

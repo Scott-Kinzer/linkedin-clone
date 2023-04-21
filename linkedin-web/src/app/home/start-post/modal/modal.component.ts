@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { PostService } from '../../service/post.service';
 
 @Component({
   selector: 'app-modal',
@@ -10,13 +11,19 @@ import { ModalController } from '@ionic/angular';
 export class ModalComponent implements OnInit {
   @ViewChild('form')
   form!: NgForm;
-  constructor(public modalController: ModalController) {}
+  constructor(
+    public modalController: ModalController,
+    public postService: PostService
+  ) {}
 
-  onPost() {
+  onPost({ body }: { body: string }) {
     if (this.form.invalid) {
       return;
     }
-    this.modalController.dismiss();
+
+    this.postService.createPost(body).subscribe((data) => {
+      this.modalController.dismiss(data);
+    });
   }
 
   onDismiss() {

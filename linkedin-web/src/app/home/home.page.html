@@ -1,11 +1,15 @@
 <div style="margin: auto; width: 100%" *ngIf="!!userData">
   <app-header></app-header>
   <div class="content-container">
-    <app-profile-summary class="ion-hide-xl-down"></app-profile-summary>
+    <app-profile-summary
+      [firstName]="userData.firstName"
+      [lastName]="userData.lastName"
+      class="ion-hide-xl-down"
+    ></app-profile-summary>
     <div style="padding-top: 10px; margin: auto">
-      <app-start-post></app-start-post>
+      <app-start-post (create)="onCreatePost($event)"></app-start-post>
       <div class="item-divider post-divider"></div>
-      <app-all-posts> </app-all-posts>
+      <app-all-posts [postBody]="post"> </app-all-posts>
     </div>
     <app-advertising class="ion-hide-xl-down"></app-advertising>
   </div>

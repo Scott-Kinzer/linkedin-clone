@@ -13,4 +13,8 @@ export class PostService {
   getSelectedPosts(take: number, skip: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${USER_API}/feed?take=${take}&skip=${skip}`);
   }
+
+  createPost(body: string) {
+    return this.http.post<Post>(`${USER_API}/feed?`, { body });
+  }
 }
