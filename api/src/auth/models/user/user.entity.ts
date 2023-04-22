@@ -20,6 +20,15 @@ export class UserEntity {
   @Column({ unique: true })
   email: string;
 
+  @Column({ nullable: true })
+  imagePath: string;
+
+  @Column({ nullable: true })
+  fileId: string;
+
+  @Column({ nullable: true })
+  fileName: string;
+
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
 
