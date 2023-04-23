@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { PostService } from '../../service/post.service';
@@ -11,6 +11,10 @@ import { PostService } from '../../service/post.service';
 export class ModalComponent implements OnInit {
   @ViewChild('form')
   form!: NgForm;
+  @Input() image = '';
+  @Input() firstName = '';
+  @Input() lastName = '';
+
   constructor(
     public modalController: ModalController,
     public postService: PostService

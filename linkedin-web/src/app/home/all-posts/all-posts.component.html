@@ -6,7 +6,11 @@
           <ion-col class="ion-padding" size="auto">
             <ion-avatar>
               <ion-img
-                src="https://img.freepik.com/photos-gratuite/gros-plan-pamplemousse-tranches_23-2148804855.jpg"
+                src="{{
+                  item.author.imagePath
+                    ? item.author.imagePath
+                    : 'https://ionicframework.com/docs/img/demos/avatar.svg'
+                }}"
               ></ion-img>
             </ion-avatar>
           </ion-col>

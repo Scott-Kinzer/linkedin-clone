@@ -31,7 +31,7 @@ import { Post } from './models/Post';
   ],
 })
 export class HomePage {
-  userData?: User;
+  userData?: User | null;
   post?: Post;
 
   constructor(private userService: UserService, private router: Router) {
@@ -40,16 +40,17 @@ export class HomePage {
         this.ngOnInit();
       }
     });
-  }
 
-  ngOnInit() {
-    this.userService.getUserInfo().subscribe((data) => {
-      this.userData = data;
+    this.userService.getUserInfo().subscribe((user) => {
+      this.userData = user;
     });
   }
 
+  ngOnInit() {
+    this.userService.fetchUserInfo();
+  }
+
   onCreatePost(body: Post) {
-    console.log(body);
     this.post = body;
   }
 }

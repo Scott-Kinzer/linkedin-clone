@@ -35,7 +35,12 @@ export class FeedService {
       this.feedPostRepository
         .createQueryBuilder('post')
         .leftJoinAndSelect('post.author', 'author')
-        .select(['post', 'author.firstName', 'author.lastName'])
+        .select([
+          'post',
+          'author.firstName',
+          'author.lastName',
+          'author.imagePath',
+        ])
         .orderBy('post.createdAt', 'DESC')
         .take(take)
         .skip(skip)

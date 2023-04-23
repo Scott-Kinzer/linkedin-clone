@@ -11,6 +11,7 @@ import { PostService } from '../service/post.service';
 import { Post } from '../models/Post';
 import { delay } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-all-posts',
@@ -19,8 +20,13 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AllPostsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() postBody?: Post;
+  @Input() imagePath?: string;
 
-  constructor(private postService: PostService, private router: Router) {
+  constructor(
+    private postService: PostService,
+    private router: Router,
+    private userService: UserService
+  ) {
     router.events.subscribe((event) => {
       this.allPosts = [];
       this.take = 5;
@@ -32,12 +38,18 @@ export class AllPostsComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
+  isFirstMount = true;
+
   ngOnChanges(changes: SimpleChanges) {
-    const postBody = changes.postBody.currentValue;
+    if (this.isFirstMount) {
+      this.isFirstMount = false;
+      return;
+    }
 
-    if (!postBody) return;
-
-    this.allPosts = [postBody, ...this.allPosts];
+    const data = this.postService.getSelectedPosts(this.skip, 0);
+    data.subscribe((data) => {
+      this.allPosts = data;
+    });
   }
 
   allPosts = <Post[]>[];

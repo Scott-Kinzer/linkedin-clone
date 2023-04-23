@@ -21,14 +21,12 @@
     <ion-row class="ion-justify-content-start">
       <ion-col size="auto">
         <ion-avatar>
-          <ion-img
-            src="https://img.freepik.com/photos-gratuite/gros-plan-pamplemousse-tranches_23-2148804855.jpg"
-          ></ion-img>
+          <ion-img src="{{ image }}"></ion-img>
         </ion-avatar>
       </ion-col>
       <ion-col size="auto">
         <div>
-          <ion-text>Addy Merphy</ion-text>
+          <ion-text>{{ firstName }} {{ lastName }}</ion-text>
         </div>
         <ion-button size="small" shape="round" fill="outline" color="medium">
           <ion-icon name="globe-outline"></ion-icon>

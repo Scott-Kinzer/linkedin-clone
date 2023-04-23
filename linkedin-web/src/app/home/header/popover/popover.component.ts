@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Token } from 'src/app/models/token.interface';
@@ -9,6 +9,10 @@ import { Token } from 'src/app/models/token.interface';
   styleUrls: ['./popover.component.scss'],
 })
 export class PopoverComponent implements OnInit {
+  @Input() image = '';
+  @Input() firstName = '';
+  @Input() lastName = '';
+
   constructor(
     private router: Router,
     public popoverController: PopoverController

@@ -7,10 +7,18 @@
       <div class="background-three"></div>
     </div>
     <ion-card-header class="ion-text-center">
-      <ion-avatar class="ion-margin-auto">
-        <ion-img
-          src="https://img.freepik.com/photos-gratuite/gros-plan-pamplemousse-tranches_23-2148804855.jpg"
-        ></ion-img>
+      <input
+        #fileUpload
+        (change)="onFileSelect($event)"
+        style="display: none"
+        type="file"
+      />
+      <ion-avatar
+        (click)="fileUpload.click()"
+        style="cursor: pointer"
+        class="ion-margin-auto"
+      >
+        <ion-img src="{{ imagePath }}"></ion-img>
       </ion-avatar>
       <ion-card-title class="ion-margin-top"
         >{{ firstName }} {{ lastName }}
