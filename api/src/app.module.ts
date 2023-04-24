@@ -7,6 +7,9 @@ import { AuthModule } from './auth/auth.module';
 
 import { UserModule } from './user/user.module';
 import { AppService } from './app.service';
+import { FriendConnectionModule } from './connections/friend-connection/friend-connection.module';
+import { FriendConnectionController } from './connections/controllers/friend-connection/friend-connection.controller';
+import { FriendConnectionService } from './connections/services/friend-connection/friend-connection.service';
 
 @Module({
   imports: [
@@ -26,8 +29,9 @@ import { AppService } from './app.service';
     FeedModule,
     AuthModule,
     UserModule,
+    FriendConnectionModule,
   ],
-  providers: [AppService],
-  controllers: [AppController],
+  providers: [AppService, FriendConnectionService],
+  controllers: [AppController, FriendConnectionController],
 })
 export class AppModule {}

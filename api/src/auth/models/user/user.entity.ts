@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../role';
 import { FeedPostEntity } from 'src/feed/models/post.entity';
 import { TokenEntity } from '../tokens/token.entity';
+import { FriendConnectionEntity } from 'src/connections/friend-connection/models/friend-connection.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -37,4 +38,16 @@ export class UserEntity {
 
   @OneToMany(() => TokenEntity, (token) => token.user)
   tokens: TokenEntity[];
+
+  @OneToMany(
+    () => FriendConnectionEntity,
+    (friendConnectionEntity) => friendConnectionEntity.creator,
+  )
+  sentFriendConnection: FriendConnectionEntity[];
+
+  @OneToMany(
+    () => FriendConnectionEntity,
+    (friendConnectionEntity) => friendConnectionEntity.receiver,
+  )
+  recieveFriendConnection: FriendConnectionEntity[];
 }
