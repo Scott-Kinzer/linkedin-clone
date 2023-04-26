@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, PopoverController } from '@ionic/angular';
+import {
+  ModalController,
+  NavController,
+  PopoverController,
+} from '@ionic/angular';
 import { Token } from 'src/app/models/token.interface';
 
 @Component({
@@ -15,7 +19,8 @@ export class PopoverComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private navController: NavController
   ) {}
 
   ngOnInit() {}
@@ -30,6 +35,6 @@ export class PopoverComponent implements OnInit {
 
     await this.hide();
 
-    this.router.navigate(['/auth']);
+    this.navController.navigateRoot('/auth');
   }
 }

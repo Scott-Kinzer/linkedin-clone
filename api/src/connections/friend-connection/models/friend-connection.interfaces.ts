@@ -1,6 +1,11 @@
 import { User } from 'src/auth/models/user/user.interface';
 
-export type FriendStatus = 'pending' | 'accepted' | 'declined';
+export type FriendStatus =
+  | 'pending'
+  | 'accepted'
+  | 'declined'
+  | 'waiting-for-current-user-response'
+  | 'not-sent';
 
 export interface FriendConnectionStatus {
   status?: FriendStatus;

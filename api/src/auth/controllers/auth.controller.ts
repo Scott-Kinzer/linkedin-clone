@@ -41,8 +41,6 @@ export class AuthController {
       throw new NotFoundException('Bad credentials');
     }
 
-    console.log(dbUserResult);
-
     const tokens = await this.authService.saveTokens({ ...dbUserResult });
 
     return tokens;

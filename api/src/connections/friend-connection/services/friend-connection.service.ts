@@ -44,9 +44,11 @@ export class FriendConnectionService {
     creator: User,
   ): Promise<FriendConnection> {
     const receiver = await this.userService.getUserInfo(receiverId);
+    const userInfo = await this.userService.getUserInfo(creator.id);
+
     const isAlreadyRequested = await this.hasBeenSentOrReceived(
       receiver,
-      creator,
+      userInfo,
     );
 
     if (isAlreadyRequested) {
@@ -54,7 +56,7 @@ export class FriendConnectionService {
     }
 
     const friendRequest: FriendConnection = {
-      creator,
+      creator: userInfo,
       receiver,
       status: 'pending',
     };
@@ -67,18 +69,39 @@ export class FriendConnectionService {
     user: User,
   ): Promise<FriendConnectionStatus> {
     const receiver = await this.userService.getUserInfo(receiverId);
+    const userInfo = await this.userService.getUserInfo(user.id);
 
     return this.friendConnectionRepo
       .findOne({
-        where: {
-          creator: user,
-          receiver: receiver,
-        },
+        where: [
+          {
+            creator: userInfo,
+            receiver: receiver,
+          },
+          {
+            creator: receiver,
+            receiver: userInfo,
+          },
+        ],
+        relations: ['creator', 'receiver'],
       })
-      .then((friendsConnection) => ({
-        id: friendsConnection.id,
-        status: friendsConnection.status,
-      }));
+      .then((friendsConnection) => {
+        if (!friendsConnection) {
+          return {
+            status: 'not-sent',
+          };
+        }
+        if (friendsConnection.receiver.id === userInfo.id) {
+          return {
+            id: friendsConnection.id,
+            status: 'waiting-for-current-user-response',
+          };
+        }
+        return {
+          id: friendsConnection.id,
+          status: friendsConnection.status,
+        };
+      });
   }
 
   getFriendRequestUserById(friendRequestId: string): Promise<FriendConnection> {

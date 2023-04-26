@@ -18,6 +18,8 @@ export class UserService {
       return null;
     }
 
+    delete userInfo.password;
+
     return userInfo;
   }
 

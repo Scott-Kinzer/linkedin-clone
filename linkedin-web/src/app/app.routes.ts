@@ -14,4 +14,11 @@ export const routes: Routes = [
     path: 'auth',
     loadComponent: () => import('./auth/auth.page').then((m) => m.AuthPage),
   },
+  {
+    path: 'home/:id',
+    loadComponent: () =>
+      import('./profile/components/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+  },
 ];

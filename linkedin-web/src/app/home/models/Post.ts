@@ -6,5 +6,6 @@ export interface Post {
     firstName: string;
     lastName: string;
     imagePath: string;
+    id: string;
   };
 }

@@ -10,6 +10,7 @@ import {
   Post,
   UseInterceptors,
   UploadedFile,
+  Param,
 } from '@nestjs/common';
 import { User } from 'src/auth/models/user/user.interface';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,6 +27,18 @@ export class UserController {
   @Get()
   async create(@Request() req: { user: User }): Promise<User> {
     const userInfo = await this.userService.getUserInfo(req.user.id);
+
+    if (!userInfo) {
+      throw new NotFoundException('User not found');
+    }
+
+    return userInfo;
+  }
+
+  @UseGuards(JwtGuard)
+  @Get(':id')
+  async getUserInfo(@Param('id') id: string): Promise<User> {
+    const userInfo = await this.userService.getUserInfo(id);
 
     if (!userInfo) {
       throw new NotFoundException('User not found');

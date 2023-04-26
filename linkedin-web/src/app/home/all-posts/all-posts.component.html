@@ -4,15 +4,17 @@
       <ion-grid>
         <ion-row>
           <ion-col class="ion-padding" size="auto">
-            <ion-avatar>
-              <ion-img
-                src="{{
-                  item.author.imagePath
-                    ? item.author.imagePath
-                    : 'https://ionicframework.com/docs/img/demos/avatar.svg'
-                }}"
-              ></ion-img>
-            </ion-avatar>
+            <a [routerLink]="['/', 'home', item.author.id]">
+              <ion-avatar style="cursor: pointer">
+                <ion-img
+                  src="{{
+                    item.author.imagePath
+                      ? item.author.imagePath
+                      : 'https://ionicframework.com/docs/img/demos/avatar.svg'
+                  }}"
+                ></ion-img>
+              </ion-avatar>
+            </a>
           </ion-col>
           <ion-col class="ion-padding" size="auto">
             <div class="full-name">

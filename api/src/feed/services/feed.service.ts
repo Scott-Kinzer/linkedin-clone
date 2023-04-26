@@ -40,6 +40,7 @@ export class FeedService {
           'author.firstName',
           'author.lastName',
           'author.imagePath',
+          'author.id',
         ])
         .orderBy('post.createdAt', 'DESC')
         .take(take)
